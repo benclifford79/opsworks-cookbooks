@@ -7,3 +7,11 @@ check process delayed_job.<%= identifier %>
   group delayed_job_<%= @application %>_group
 
 <% end %>
+
+# Nevaya Clockwork task
+
+check process clockwork
+  with pidfile <%= @deploy[:deploy_to] %>/shared/pids/clockwork.pid
+  start program = "/bin/su - <%= @deploy[:user] %> -c 'cd <%= @deploy[:current_path] %> && RAILS_ENV=<%= @deploy[:rails_env] %> bundle exec ruby lib/clock.rb start'"
+  stop  program = "/bin/su - <%= @deploy[:user] %> -c 'cd <%= @deploy[:current_path] %> && RAILS_ENV=<%= @deploy[:rails_env] %> bundle exec ruby lib/clock.rb start'"
+  group delayed_job_<%= @application %>_group
