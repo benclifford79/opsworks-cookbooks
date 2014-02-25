@@ -5,10 +5,11 @@ include_recipe "opsworks_delayed_job::service"
 # setup delayed_job service per app
 node[:deploy].each do |application, deploy|
   
-  if deploy[:application_type] != 'rails'
-    Chef::Log.debug("Skipping opsworks_delayed_job::setup application #{application} as it is not a Rails app")
-    next
-  end
+  Chef::Log.debug("NEVAYA: Overriding check for rails app in opsworks_delayed_jon::recipes:setup.rb for applicatiin #{application}")
+#  if deploy[:application_type] != 'rails'
+#    Chef::Log.debug("Skipping opsworks_delayed_job::setup application #{application} as it is not a Rails app")
+#    next
+#  end
 
   opsworks_deploy_user do
     deploy_data deploy
