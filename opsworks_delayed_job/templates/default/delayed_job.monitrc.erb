@@ -12,6 +12,6 @@ check process delayed_job.<%= identifier %>
 
 check process clockwork
   with pidfile <%= @deploy[:deploy_to] %>/shared/pids/clockwork.pid
-  start program = "/bin/su - <%= @deploy[:user] %> -c 'cd <%= @deploy[:current_path] %> && RAILS_ENV=<%= @deploy[:rails_env] %> bundle exec ruby lib/clock.rb start'"
-  stop  program = "/bin/su - <%= @deploy[:user] %> -c 'cd <%= @deploy[:current_path] %> && RAILS_ENV=<%= @deploy[:rails_env] %> bundle exec ruby lib/clock.rb start'"
+  start program = "/bin/su - <%= @deploy[:user] %> -c 'cd <%= @deploy[:current_path] %> && RAILS_ENV=<%= @deploy[:rails_env] %> bundle exec ruby lib/clockwork_control.rb start'"
+  stop  program = "/bin/su - <%= @deploy[:user] %> -c 'cd <%= @deploy[:current_path] %> && RAILS_ENV=<%= @deploy[:rails_env] %> bundle exec ruby lib/clockwork_control.rb start'"
   group delayed_job_<%= @application %>_group
