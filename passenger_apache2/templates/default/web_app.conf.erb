@@ -6,7 +6,7 @@
   <% if @params[:server_aliases] && !@params[:server_aliases].empty? -%>
   ServerAlias <% @params[:server_aliases].each do |a| %><%= "#{a}" %> <% end %>
   <% end -%>
-
+  Header set Access-Control-Allow-Origin "*"
   <% if @params[:mounted_at] -%>
   DocumentRoot /var/www
   <%= passenger_handler -%>BaseURI <%= @params[:mounted_at] %>
@@ -79,6 +79,7 @@
 <% if node[:deploy][@application_name][:ssl_support] -%>
 <VirtualHost *:443>
   ServerName <%= @params[:server_name] %>
+  Header set Access-Control-Allow-Origin "*"
   <% if @params[:server_aliases] && !@params[:server_aliases].empty? -%>
   ServerAlias <% @params[:server_aliases].each do |a| %><%= "#{a}" %> <% end %>
   <% end -%>
